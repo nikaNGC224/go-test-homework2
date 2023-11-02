@@ -8,11 +8,11 @@ import (
 func findKthLargest(nums []int, k int) int {
 	if nums == nil {
 		fmt.Println("Массив пуст")
-		os.Exit(1)
+		os.Exit(0)
 	}
 	if k > len(nums) {
 		fmt.Println("k больше длины массива")
-		os.Exit(2)
+		os.Exit(0)
 	}
 
 	n := len(nums)
