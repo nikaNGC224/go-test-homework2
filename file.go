@@ -16,13 +16,26 @@ func findKthLargest(nums []int, k int) int {
 	}
 
 	n := len(nums)
-	lowLimit := n - k
-	for i := n; i > lowLimit; i-- {
-		for j := n - 1; j > n-i; j-- {
-			if nums[j] > nums[j-1] {
-				nums[j], nums[j-1] = nums[j-1], nums[j]
+
+	if k > n/2 {
+		lowLimit := k - 1
+		for i := n; i > lowLimit; i-- {
+			for j := n - 1; j > n-i; j-- {
+				if nums[j] < nums[j-1] {
+					nums[j], nums[j-1] = nums[j-1], nums[j]
+				}
 			}
 		}
+		return nums[n-k]
+	} else {
+		lowLimit := n - k
+		for i := n; i > lowLimit; i-- {
+			for j := n - 1; j > n-i; j-- {
+				if nums[j] > nums[j-1] {
+					nums[j], nums[j-1] = nums[j-1], nums[j]
+				}
+			}
+		}
+		return nums[k-1]
 	}
-	return nums[k-1]
 }
