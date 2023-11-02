@@ -1,20 +1,28 @@
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 func findKthLargest(nums []int, k int) int {
 	if nums == nil {
-		panic("Массив пуст")
+		fmt.Println("Массив пуст")
+		os.Exit(1)
 	}
 	if k > len(nums) {
-		panic("k больше длины массива")
+		fmt.Println("k больше длины массива")
+		os.Exit(2)
 	}
-	n := len(nums) - 1
-	for i := n; i > k; i-- {
-		for j := n; j > n-i; j-- {
+
+	n := len(nums)
+	lowLimit := n - k
+	for i := n; i > lowLimit; i-- {
+		for j := n - 1; j > n-i; j-- {
 			if nums[j] > nums[j-1] {
 				nums[j], nums[j-1] = nums[j-1], nums[j]
 			}
 		}
 	}
-
 	return nums[k-1]
 }
